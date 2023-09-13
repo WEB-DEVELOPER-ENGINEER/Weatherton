@@ -1,0 +1,8 @@
+.generate-wind-beaufort-classes(@index) when (@index <= 12) {
+  .wi-wind-beaufort-@{index}:before {
+    content: @wind-beaufort-@{index};
+  }
+  .generate-wind-beaufort-classes(@index + 1);
+}
+
+.generate-wind-beaufort-classes(0);
