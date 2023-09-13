@@ -1,5 +1,4 @@
 # Weatherton
-![m5](https://github.com/WEB-DEVELOPER-ENGINEER/Weatherton/assets/101446375/b9419202-34fb-4667-8c92-f4db5a367301)
 
 Welcome to the Weatherton, a Python Flask application that automatically detects local weather based on the user's external IP address.
 
