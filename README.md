@@ -29,4 +29,4 @@ Weatherton provides the following functionality:
 2. Weatherton will automatically detect your location based on your IP address.
 3. You will be redirected to a page displaying the current weather for your location, including temperature and a description of the weather conditions.
 4. Depending on the weather conditions, you will see an appropriate weather icon to visually represent the current weather.
-### Note that you can see the weather data for another city by changing the city and the countrycode in the url
+### Note that you can see the weather data for another city by changing the city and the countrycode in the url, but you might need to clear the cache first
