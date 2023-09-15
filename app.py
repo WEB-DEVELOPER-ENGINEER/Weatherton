@@ -31,10 +31,13 @@ def weather(city, state):
     weather_key = os.environ['weather_key']
     if 'ip_info' in session:
         data = session['ip_info']
-        geo_info = data['ip_coords']
+        ip_coords = data['ip_coords']
+        url = f'http://dataservice.accuweather.com/locations/v1/cities/geoposition/search?apikey={weather_key}&q={ip_coords}'
+        resp = requests.get(url)
+        data = resp.json()
+        geo_info = data.get("Key")
     else:
-        geo_info = get_geo_info()
-    geo_info = get_geo_info()	
+        geo_info = get_geo_loc(city, state)
     if geo_info is None:
         return error_page('GEO info Missing!')
     url = f'http://dataservice.accuweather.com/forecasts/v1/hourly/1hour/{geo_info}?apikey={weather_key}&metric=true'
@@ -75,7 +78,6 @@ def error_page(error):
     return render_template('404.html'), 404
 
 
-# private non-route methods
 def get_ip_info():
     if 'X-Forwarded-For' in request.headers:
         user_ip = str(request.headers['X-Forwarded-For'])
@@ -102,6 +104,14 @@ def get_geo_info():
     resp = requests.get(url)
     data = resp.json()
     location_key = data.get("Key")
+    return location_key
+
+def get_geo_loc(city, state):
+    weather_key = os.environ['weather_key']
+    url = f'http://dataservice.accuweather.com/locations/v1/cities/{state}/search?apikey={weather_key}&q={city}'
+    response = requests.get(url)
+    data = response.json()
+    location_key = data[0]["Key"]
     return location_key
 
 def get_geo_str(lat, lon):
